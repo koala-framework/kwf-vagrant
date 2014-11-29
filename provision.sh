@@ -22,12 +22,13 @@ echo "</VirtualHost>" >> /etc/apache2/sites-enabled/000-default.conf
 
 echo "short_open_tag = On" >> /etc/php5/apache2/php.ini
 
-rm -rf /var/www
-ln -fs /vagrant/app /var/www
-
 a2enmod rewrite
 
-chmod a+w /var/www/cache /var/www/temp /var/www/log /var/www/log/* /var/www/cache/*
+rm -rf /var/www
+cp -r /vagrant/app /var/www
+
+chown -R vagrant.www-data /var/www
+chmod a+w /var/www/cache /var/www/temp /var/www/log /var/www/log/* /var/www/cache/* /var/www
 
 mkdir /var/uploads
 chmod a+w /var/uploads
