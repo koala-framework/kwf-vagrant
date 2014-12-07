@@ -50,6 +50,7 @@ mysql -u root --password=koala -e "CREATE DATABASE app"
 service apache2 restart
 
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+npm install -g bower
 
 su vagrant -c "cd /var/www && COMPOSER_PROCESS_TIMEOUT=2000 composer install"
 su vagrant -c "php /var/www/bootstrap.php"
