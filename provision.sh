@@ -56,4 +56,10 @@ su vagrant -c "cd /var/www && COMPOSER_PROCESS_TIMEOUT=2000 composer install"
 su vagrant -c "php /var/www/bootstrap.php"
 su vagrant -c "php /var/www/bootstrap.php clear-cache"
 su vagrant -c "php /var/www/bootstrap.php build"
-su vagrant -c "php /var/www/bootstrap.php setup"
+
+if [ ! -f /vagrant/app.sql ]; then
+    su vagrant -c "php /var/www/bootstrap.php setup"
+else
+    mysql -u root --password=koala app < app.sql
+    su vagrant -c "php /var/www/bootstrap.php update"
+fi
